@@ -25,9 +25,11 @@ jobs:
         env:
           ISSUE_NUMBER: ${{ github.event.number }}
         run: |
+          mkdir -p docs
+          mv *.adoc
           git add *.adoc
           git config --global user.email "${{ secrets.COMMITTER_EMAIL }}"
-          git config --global user.name "${{ secrets.COMMITTER_NAME }}"
+          git config --global user.name "Commit Teller :memo:"
           git commit -m "Creating story about pull request ${ISSUE_NUMBER}"
           git push origin main
 
