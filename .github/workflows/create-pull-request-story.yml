@@ -1,0 +1,33 @@
+name: Create story about Pull Request
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  create-story-for-pull-request:
+    runs-on: ubuntu-latest
+    name: Create story for pull request at merge
+    if: github.event.pull_request.merged == true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: rodnansol/commit-teller-action@v0.1.0
+        name: Create story
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          COMMIT_TELLER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_TELLER_OPENAI_API_KEY: ${{ secrets.OPENAI_KEY }}
+        with:
+          version: early-access
+          arguments: create-story -pr ${ISSUE_NUMBER} --owner ${GITHUB_REPOSITORY%/*} --repository ${GITHUB_REPOSITORY#*/} -saf=true --file-extension ADOC
+      - name: Commit story changes
+        shell: bash
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          git add *.adoc
+          git config --global user.email "${{ secrets.COMMITTER_EMAIL }}"
+          git config --global user.name "${{ secrets.COMMITTER_NAME }}"
+          git commit -m "Creating story about pull request ${ISSUE_NUMBER}"
+          git push origin main
+
