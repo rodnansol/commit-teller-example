@@ -11,7 +11,7 @@ jobs:
     if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v3
-      - uses: rodnansol/commit-teller-action@v0.1.0 # <.>
+      - uses: rodnansol/commit-teller-action@v0.1.0
         name: Create story
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -19,7 +19,7 @@ jobs:
           COMMIT_TELLER_OPENAI_API_KEY: ${{ secrets.OPENAI_KEY }}
         with:
           version: early-access
-          arguments: create-story -pr ${ISSUE_NUMBER} --owner ${GITHUB_REPOSITORY%/*} --repository ${GITHUB_REPOSITORY#*/}
+          arguments: create-story -pr ${ISSUE_NUMBER} --owner ${GITHUB_REPOSITORY%/*} --repository ${GITHUB_REPOSITORY#*/} -saf=true --file-extension ADOC
       - name: Commit story changes
         shell: bash
         env:
