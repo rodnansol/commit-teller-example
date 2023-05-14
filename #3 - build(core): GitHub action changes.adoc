@@ -1,0 +1,3 @@
+== build(core): GitHub action changes
+
+The GitHub team was hard at work, trying to make sure their core was up to date. After some investigation, they found that the ${{ github.event.number }} should be used instead of the ${{ github.event.issue.number }}. To make sure everything was running smoothly, they also removed the context dump. All in all, it was a successful day of documentation and funny commit messages.
