@@ -1,6 +1,12 @@
-# commit-teller-example
-Example Commit Teller Repository
+# Commit Teller Example
 
-This is just an example line.
+This Markdown file contains lines and each of them are committed one by one to make sure we have enough commits for our little story :)
 
-And this is another example line to make sure we have commits.
+- [dev.to](https://dev.to/) is amazing!
+- [GitHub](https://github.com/) is one of the best version control system.
+- [Quarkus](https://quarkus.io/) is an upcoming Java framework that is highly efficient and easy to use. Try it out today!
+
+Follow me for more:
+
+- https://github.com/nandorholozsnyak
+- https://github.com/rodnansol
